@@ -45,7 +45,7 @@ with st.sidebar:
 
 # --- INPUT SECTION ---
 st.subheader("Source")
-uploaded_file = st.file_uploader("Upload document (.txt or .docx)", type=["txt", "docx","pdf"])
+uploaded_file = st.file_uploader("Upload document", type=["txt", "docx","pdf"],width="stretch")
 
 raw_text = ""
 if uploaded_file:
@@ -77,7 +77,7 @@ if raw_text:
         is_valid = True
 
 # --- EXECUTION ---
-if st.button("Generate Summary", disabled=not is_valid):
+if st.button("Generate Summary", width="stretch", disabled=not is_valid)
     with st.spinner('Fusing multi-stage embeddings...'):
         # 1. Pipeline
         sentences, tokenized_sentences = preprocess_text(raw_text)
@@ -166,3 +166,4 @@ if st.button("Generate Summary", disabled=not is_valid):
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
 
             st.plotly_chart(fig, width='stretch')
+
