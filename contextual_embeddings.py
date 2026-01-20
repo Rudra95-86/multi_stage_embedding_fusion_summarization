@@ -5,6 +5,7 @@ from transformers import BertTokenizer, BertModel
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 model = BertModel.from_pretrained("bert-base-uncased")
 
+@st.cache_resource
 def get_bert_embeddings(sentences):
     embeddings = []
 
@@ -24,3 +25,4 @@ def get_bert_embeddings(sentences):
         embeddings.append(cls_embedding)
 
     return np.array(embeddings)
+
