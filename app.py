@@ -105,7 +105,7 @@ if st.button("Generate Summary", disabled=not is_valid):
             bio = BytesIO()
             doc_out.save(bio)
             st.download_button("📥 Download Summary", bio.getvalue(), "summary.docx", 
-                               "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                               "application/vnd.openxmlformats-officedocument.wordprocessingml.document",width='stretch')
 
         # ... (Previous imports and initialization code remain the same)
 
@@ -164,4 +164,5 @@ if st.button("Generate Summary", disabled=not is_valid):
             })
             fig = px.bar(chart_data, x="Metric", y=["Baseline (Single)", "Proposed (Fused)"], 
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
-            st.plotly_chart(fig, use_container_width=True)
+
+            st.plotly_chart(fig, width='stretch')
