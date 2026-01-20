@@ -100,7 +100,6 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
             
             # DOCX Download
             doc_out = Document()
-            doc_out.add_heading('Fused Embedding Summary', 0)
             doc_out.add_paragraph(summary_fused)
             bio = BytesIO()
             doc_out.save(bio)
@@ -166,5 +165,6 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
 
             st.plotly_chart(fig, width='stretch')
+
 
 
