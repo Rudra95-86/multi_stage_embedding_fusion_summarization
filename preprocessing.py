@@ -3,22 +3,22 @@ import re
 from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-# --- FIXED DOWNLOAD LOGIC ---
+# --- UPDATED DOWNLOAD LOGIC FOR CLOUD DEPLOYMENT ---
 try:
-    nltk.data.find('tokenizers/punkt')
+    nltk.data.find('tokenizers/punkt_tab')
     nltk.data.find('corpora/stopwords')
 except LookupError:
     nltk.download('punkt')
-    nltk.download('punkt_tab') # Required for newer NLTK versions
+    nltk.download('punkt_tab')  # Explicitly download the missing resource
     nltk.download('stopwords')
-# ----------------------------
+# --------------------------------------------------
 
 stop_words = set(stopwords.words("english"))
 
 def preprocess_text(text):
     # Sentence tokenization
     sentences = sent_tokenize(text)
-
+    
     tokenized_sentences = []
     for sent in sentences:
         sent = sent.lower()
@@ -28,4 +28,3 @@ def preprocess_text(text):
         tokenized_sentences.append(words)
 
     return sentences, tokenized_sentences
-
