@@ -1,4 +1,5 @@
 from sentence_transformers import SentenceTransformer
+import streamlit as st
 
 # Load model once
 model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -15,4 +16,5 @@ def get_sentence_bert_embeddings(sentences):
         normalize_embeddings=False
     )
     return embeddings
+
 
