@@ -1,4 +1,5 @@
 import torch
+import streamlit as st
 import numpy as np
 from transformers import BertTokenizer, BertModel
 
@@ -25,4 +26,5 @@ def get_bert_embeddings(sentences):
         embeddings.append(cls_embedding)
 
     return np.array(embeddings)
+
 
