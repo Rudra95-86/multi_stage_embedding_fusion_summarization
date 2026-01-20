@@ -77,7 +77,7 @@ if raw_text:
         is_valid = True
 
 # --- EXECUTION ---
-if st.button("Generate Summary", width="stretch", disabled=not is_valid)
+if st.button("Generate Summary", width="stretch", disabled=not is_valid):
     with st.spinner('Fusing multi-stage embeddings...'):
         # 1. Pipeline
         sentences, tokenized_sentences = preprocess_text(raw_text)
@@ -166,4 +166,5 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid)
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
 
             st.plotly_chart(fig, width='stretch')
+
 
