@@ -3,8 +3,15 @@ import re
 from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-nltk.download("punkt")
-nltk.download("stopwords")
+# --- FIXED DOWNLOAD LOGIC ---
+try:
+    nltk.data.find('tokenizers/punkt')
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('punkt')
+    nltk.download('punkt_tab') # Required for newer NLTK versions
+    nltk.download('stopwords')
+# ----------------------------
 
 stop_words = set(stopwords.words("english"))
 
@@ -21,3 +28,4 @@ def preprocess_text(text):
         tokenized_sentences.append(words)
 
     return sentences, tokenized_sentences
+
