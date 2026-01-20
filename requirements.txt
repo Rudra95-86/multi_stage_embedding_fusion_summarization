@@ -5,3 +5,6 @@ scikit-learn
 transformers
 sentence-transformers
 torch
+plotly
+python-docx
+rouge-score
