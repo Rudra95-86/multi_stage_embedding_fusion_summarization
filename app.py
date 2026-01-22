@@ -44,26 +44,18 @@ with st.sidebar:
     st.caption("- **Higher Ratio:** More detail, longer summary.")
     st.caption("- **Lower Ratio:** More concise, only core meaning.")
 
+
 # --- INPUT SECTION ---
 st.subheader("Source")
-uploaded_file = st.file_uploader("Upload document", type=["txt", "docx","pdf"],width="stretch")
+uploaded_file = st.file_uploader("Upload document (.txt or .docx)", type=["txt", "docx","pdf"])
 
 raw_text = ""
 if uploaded_file:
     if uploaded_file.type == "text/plain":
         raw_text = str(uploaded_file.read(), "utf-8")
-    
-    elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+    else:
         doc = Document(uploaded_file)
         raw_text = "\n".join([p.text for p in doc.paragraphs])
-    
-    # Handle PDF
-    elif uploaded_file.type == "application/pdf":
-        pdf_reader = PyPDF2.PdfReader(uploaded_file)
-        for page in pdf_reader.pages:
-            content = page.extract_text()
-            if content:
-                raw_text += content + "\n"
 
 # Manual input fallback
 if not raw_text:
