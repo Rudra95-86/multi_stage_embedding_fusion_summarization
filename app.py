@@ -53,10 +53,12 @@ if uploaded_file:
     if uploaded_file.type == "text/plain":
         raw_text = str(uploaded_file.read(), "utf-8")
         
-    elif doc = Document(uploaded_file):
-         raw_text = "\n".join([p.text for p in doc.paragraphs])\
+    elif:
+        doc = Document(uploaded_file)
+        raw_text = "\n".join([p.text for p in doc.paragraphs])\
         
-    elif uploaded_file.type == "application/pdf":
+    elif:
+        uploaded_file.type == "application/pdf"
         pdf_reader = PyPDF2.PdfReader(uploaded_file)
         for page in pdf_reader.pages:
             content = page.extract_text()
@@ -173,6 +175,7 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
 
             st.plotly_chart(fig, width='stretch')
+
 
 
 
