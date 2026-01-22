@@ -47,36 +47,15 @@ with st.sidebar:
 
 # --- INPUT SECTION ---
 st.subheader("Source")
-uploaded_file = st.file_uploader("Upload document (.txt, .docx, or .pdf)", type=["txt", "docx", "pdf"])
+uploaded_file = st.file_uploader("Upload document (.txt or .docx)", type=["txt", "docx"])
 
 raw_text = ""
-
 if uploaded_file:
-    file_type = uploaded_file.type
-    
-    if file_type == "text/plain":
-        # Handle TXT
+    if uploaded_file.type == "text/plain":
         raw_text = str(uploaded_file.read(), "utf-8")
-        
-    elif file_type == "application/pdf":
-        # Handle PDF
-        try:
-            pdf_reader = PyPDF2.PdfReader(uploaded_file)
-            pdf_pages = []
-            for page in pdf_reader.pages:
-                page_text = page.extract_text()
-                if page_text:
-                    pdf_pages.append(page_text)
-            raw_text = "\n".join(pdf_pages)
-        except Exception as e:
-            st.error(f"Error reading PDF: {e}")
-            
     else:
-        try:
-            doc = Document(uploaded_file)
-            raw_text = "\n".join([p.text for p in doc.paragraphs])
-        except Exception as e:
-            st.error(f"Error reading Word document: {e}")
+        doc = Document(uploaded_file)
+        raw_text = "\n".join([p.text for p in doc.paragraphs])
 
 # Manual input fallback
 if not raw_text:
@@ -84,7 +63,6 @@ if not raw_text:
 
 # --- VALIDATION LOGIC ---
 is_valid = False
-# --- UPDATED VALIDATION LOGIC ---
 if raw_text:
     words = raw_text.split()
     word_count = len(words)
@@ -188,6 +166,7 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
 
             st.plotly_chart(fig, width='stretch')
+
 
 
 
