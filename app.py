@@ -57,7 +57,7 @@ if uploaded_file:
         doc = Document(uploaded_file)
         raw_text = "\n".join([p.text for p in doc.paragraphs])\
         
-    elif:
+    else:
         uploaded_file.type == "application/pdf"
         pdf_reader = PyPDF2.PdfReader(uploaded_file)
         for page in pdf_reader.pages:
@@ -175,6 +175,7 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
 
             st.plotly_chart(fig, width='stretch')
+
 
 
 
