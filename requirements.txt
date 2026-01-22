@@ -8,3 +8,4 @@ torch
 plotly
 python-docx
 rouge-score
+PyPDF2
