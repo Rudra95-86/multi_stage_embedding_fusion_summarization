@@ -63,21 +63,21 @@ if not raw_text:
 
 # --- VALIDATION LOGIC ---
 is_valid = False
+# --- UPDATED VALIDATION LOGIC ---
 if raw_text:
     words = raw_text.split()
     word_count = len(words)
     
-    # Check if input is purely numerical
-    is_pure_numbers = all(re.match(r'^[0-9\W]+$', w) for w in words)
-    
-    if is_pure_numbers:
-        st.error("❌ **Invalid Input:** The document contains only numbers/symbols. Please provide text for analysis.")
+    if word_count > 2500: # Setting a safety cap for 1GB RAM
+        st.error("❌ **Document Too Large:** This document exceeds the 2500-word limit for the free hosting tier. Please upload a smaller section.")
+        is_valid = False
     elif word_count < 100:
-        st.warning(f"⚠️ **Word Count Low:** Only {word_count} words detected. A minimum of 100 words is required.")
+        st.warning(f"⚠️ **Word Count Low:** Only {word_count} words detected.")
+        is_valid = False
     else:
         st.info(f"✅ **Document Ready:** {word_count} words detected.")
         is_valid = True
-
+        
 # --- EXECUTION ---
 if st.button("Generate Summary", width="stretch", disabled=not is_valid):
     with st.spinner('Fusing multi-stage embeddings...'):
@@ -167,6 +167,7 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
 
             st.plotly_chart(fig, width='stretch')
+
 
 
 
