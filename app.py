@@ -46,21 +46,6 @@ with st.sidebar:
 
 
 # --- INPUT SECTION ---
-hide_label = """
-<style>
-    /* Target the small text inside the file uploader */
-    [data-testid="stFileUploader"] small {
-        display: none;
-    }
-    /* Fallback for different Streamlit versions */
-    [data-testid="stFileUploader"] span[class^="css-"] {
-        display: none;
-    }
-</style>
-"""
-st.markdown(hide_label, unsafe_allow_html=True)
-# ------------------------------------------
-
 st.subheader("Source")
 uploaded_file = st.file_uploader("Upload document (.txt or .docx)", type=["txt", "docx"])
 
@@ -71,8 +56,8 @@ if uploaded_file:
     else:
         doc = Document(uploaded_file)
         raw_text = "\n".join([p.text for p in doc.paragraphs])
-
 # Manual input fallback
+
 if not raw_text:
     raw_text = st.text_area("Or Paste Source Document Here...", height=200)
 
@@ -179,6 +164,7 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
 
             st.plotly_chart(fig, width='stretch')
+
 
 
 
