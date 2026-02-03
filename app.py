@@ -46,6 +46,16 @@ with st.sidebar:
 
 
 # --- INPUT SECTION ---
+css = '''
+<style>
+    [data-testid='stFileUploader'] section > small {
+        display: none;
+    }
+</style>
+'''
+st.markdown(css, unsafe_allow_html=True)
+# ------------------------------------------
+
 st.subheader("Source")
 uploaded_file = st.file_uploader("Upload document (.txt or .docx)", type=["txt", "docx"])
 
@@ -67,7 +77,7 @@ if raw_text:
     words = raw_text.split()
     word_count = len(words)
     
-    if word_count > 2500: # Setting a safety cap for 1GB RAM
+    if word_count > 2500: # Setting a safety cap 
         st.error("❌ **Document Too Large:** This document exceeds the 2500-word limit for the free hosting tier. Please upload a smaller section.")
         is_valid = False
     elif word_count < 100:
@@ -96,7 +106,7 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
 
         with tab1:
             st.subheader("Summary")
-            # Native st.write ensures high contrast (Black text on Light mode, White on Dark)
+            # Native st.write ensures high contrast 
             st.write(summary_fused)
             
             # DOCX Download
@@ -106,8 +116,6 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
             doc_out.save(bio)
             st.download_button("📥 Download Summary", bio.getvalue(), "summary.docx", 
                                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",width='stretch')
-
-        # ... (Previous imports and initialization code remain the same)
 
         with tab2:
             st.subheader("Compression & Accuracy Evaluation")
@@ -166,6 +174,7 @@ if st.button("Generate Summary", width="stretch", disabled=not is_valid):
                          barmode="group", color_discrete_sequence=['#A0AEC0', '#3182CE'], template="plotly_white")
 
             st.plotly_chart(fig, width='stretch')
+
 
 
 
