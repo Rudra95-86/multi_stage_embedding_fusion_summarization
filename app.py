@@ -46,14 +46,19 @@ with st.sidebar:
 
 
 # --- INPUT SECTION ---
-css = '''
+hide_label = """
 <style>
-    [data-testid='stFileUploader'] section > small {
+    /* Target the small text inside the file uploader */
+    [data-testid="stFileUploader"] small {
+        display: none;
+    }
+    /* Fallback for different Streamlit versions */
+    [data-testid="stFileUploader"] span[class^="css-"] {
         display: none;
     }
 </style>
-'''
-st.markdown(css, unsafe_allow_html=True)
+"""
+st.markdown(hide_label, unsafe_allow_html=True)
 # ------------------------------------------
 
 st.subheader("Source")
